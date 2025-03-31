@@ -13,9 +13,9 @@ import  frame4 from '../../../public/assets/img/coporate-events.png'
 import  planImg from '../../../public/assets/img/planNextEvent.png'
 import { motion} from "framer-motion";
 import ModalComponent from '@/components/ModalComponent';
-import rent1Img from '../../../public/assets/img/rent1.png'
-import rent2Img from '../../../public/assets/img/rent2.png'
-import rent3Img from '../../../public/assets/img/rent3.png'
+// import rent1Img from '../../../public/assets/img/rent1.png'
+// import rent2Img from '../../../public/assets/img/rent2.png'
+// import rent3Img from '../../../public/assets/img/rent3.png'
 import Link from 'next/link';
 import useFadeIn from '@/shared/GlobalAnimation';
 import CalendlyPopup from '@/components/CalendlyEmbed';
@@ -167,30 +167,30 @@ const data = [
     },
 ]
 
-export const rentalData = [
-    {
-        id: 1,
-        image: rent1Img,
-        title: "Crockeries",
-        price: '20,303',
-        btnText: 'rentals'
-    },
-    {
-        id: 3,
-        image: rent3Img,
-        title: 'Sashes',
-        price: '400,303',
-        btnText: 'rentals'
-    },
-    {
-        id: 2,
-        image: rent2Img,
-        title: "Magazine Photo booth",
-        price: '20,039',
-        btnText: 'rentals'
-    },
+// export const rentalData = [
+//     {
+//         id: 1,
+//         image: rent1Img,
+//         title: "Crockeries",
+//         price: '20,303',
+//         btnText: 'rentals'
+//     },
+//     {
+//         id: 3,
+//         image: rent3Img,
+//         title: 'Sashes',
+//         price: '400,303',
+//         btnText: 'rentals'
+//     },
+//     {
+//         id: 2,
+//         image: rent2Img,
+//         title: "Magazine Photo booth",
+//         price: '20,039',
+//         btnText: 'rentals'
+//     },
    
-]
+// ]
 
 const Service = () => {
     const [selectedCard, setSelectedCard] = useState(null);

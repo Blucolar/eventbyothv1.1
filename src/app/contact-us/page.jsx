@@ -1,8 +1,8 @@
 'use client'
 import React, { useState } from 'react'
-import rent1Img from '../../../public/assets/img/rent1.png'
-import rent2Img from '../../../public/assets/img/rent2.png'
-import rent3Img from '../../../public/assets/img/rent3.png'
+// import rent1Img from '../../../public/assets/img/rent1.png'
+// import rent2Img from '../../../public/assets/img/rent2.png'
+// import rent3Img from '../../../public/assets/img/rent3.png'
 import { motion } from 'framer-motion';
 import Image from 'next/image'
 import HeroComponent from '@/components/HeroComponent';
@@ -18,50 +18,50 @@ import toast from 'react-hot-toast'
 
 
 
-export const rentalData = [
-    {
-        id: 1,
-        image: rent1Img,
-        title: "Crockeries",
-        price: '20,303',
-        btnText: 'rent now'
-    },
-    {
-        id: 2,
-        image: rent2Img,
-        title: "Sashes",
-        price: '20,039',
-        btnText: 'rent now'
-    },
-    {
-        id: 3,
-        image: rent3Img,
-        title: 'Magazine Photo booth',
-        price: '400,303',
-        btnText: 'rent now'
-    },
-    {
-        id: 4,
-        image: rent3Img,
-        title: 'Magazine Photo booth',
-        price: '400,303',
-        btnText: 'rent now'
-    },
-    {
-        id: 5,
-        image: rent2Img,
-        title: 'Magazine Photo booth',
-        price: '400,303',
-        btnText: 'rent now'
-    },
-    {
-        id: 6,
-        image: rent1Img,
-        title: 'Magazine Photo booth',
-        price: '400,303',
-        btnText: 'rent now'
-    }
-]
+// export const rentalData = [
+//     {
+//         id: 1,
+//         image: rent1Img,
+//         title: "Crockeries",
+//         price: '20,303',
+//         btnText: 'rent now'
+//     },
+//     {
+//         id: 2,
+//         image: rent2Img,
+//         title: "Sashes",
+//         price: '20,039',
+//         btnText: 'rent now'
+//     },
+//     {
+//         id: 3,
+//         image: rent3Img,
+//         title: 'Magazine Photo booth',
+//         price: '400,303',
+//         btnText: 'rent now'
+//     },
+//     {
+//         id: 4,
+//         image: rent3Img,
+//         title: 'Magazine Photo booth',
+//         price: '400,303',
+//         btnText: 'rent now'
+//     },
+//     {
+//         id: 5,
+//         image: rent2Img,
+//         title: 'Magazine Photo booth',
+//         price: '400,303',
+//         btnText: 'rent now'
+//     },
+//     {
+//         id: 6,
+//         image: rent1Img,
+//         title: 'Magazine Photo booth',
+//         price: '400,303',
+//         btnText: 'rent now'
+//     }
+// ]
 
 const slides = [
     {
