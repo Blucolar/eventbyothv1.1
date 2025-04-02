@@ -22,6 +22,7 @@ import CalendlyPopup from '@/components/CalendlyEmbed';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import RentalModal from '@/components/RentalModal';
+import { LuPoundSterling } from 'react-icons/lu';
 
 
 
@@ -383,7 +384,12 @@ const Service = () => {
                                     <Image src={item?.image_url} alt='image' width={500} height={500} className='h-full w-full object-cover rounded-lg'/>
                                 </motion.div>
                                 <div className='h-full px-3 w-full'>
-                                    <h2 className='text-lg font-semibold py-2'>{item?.name}</h2>
+                                    <h2 className='text-lg font-semibold py-2 flex items-center justify-between'>
+                                        <span>
+                                            {item?.name}
+                                        </span>
+                                        <span className='font-semibold text-lg flex items-center'><LuPoundSterling />{item?.price_per_unit}</span>
+                                    </h2>
                                     {/* <div className='py-3 rounded flex justify-center items-center text-center border border-primary w-full'>
                                         <Link href={item.btnText} className='text-primary rounded h-full w-full'>Rent Now</Link>
                                     </div> */}

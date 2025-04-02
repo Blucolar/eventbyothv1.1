@@ -12,6 +12,7 @@ import RentalModal from '@/components/RentalModal'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 import Loader from '@/shared/loader'
+import { LuPoundSterling } from 'react-icons/lu';
 
 const MotionImage = motion(Image); 
 
@@ -100,6 +101,8 @@ const page = () => {
         setVisibleCount(6)
     }
 
+    // console.log(items)
+
   return (
     <>
         <section>
@@ -125,7 +128,12 @@ const page = () => {
                                     <Image src={item?.image_url} alt='image' width={500} height={500} className='h-full w-full object-cover rounded-lg'/>
                                 </motion.div>
                                 <div className='h-full px-3 '>
-                                    <h2 className='text-lg font-semibold py-2'>{item?.name}</h2>
+                                    <h2 className='text-lg font-semibold py-2 flex items-center justify-between'>
+                                        <span>
+                                            {item?.name}
+                                        </span>
+                                        <span className='font-semibold text-lg flex items-center'><LuPoundSterling />{item?.price_per_unit}</span>
+                                    </h2>
                                     <div className='flex justify-between items-center'>
                                         <div className='rounded flex justify-center items-center text-center border border-primary w-full hover:border-opacity-70 transition-all cursor-pointer group' >
                                             <button className='p-3 bg-white text-primary border-primary rounded group-hover:text-opacity-65'>Rent Now</button>
@@ -155,7 +163,7 @@ const page = () => {
                         <div className='w-full lg:w-1/2'>
                         <p className='text-xl md:text-[28px] font-bold py-2'>{selectedCard?.name}</p>
                         <p className='text-neutral py-2 text-normal md:text-2xl'>{selectedCard?.description}</p>
-                        {/* <p className='font-semibold py-2'>{selectedCard.details.title}</p> */}
+                        <span className='font-semibold text-lg flex items-center'><LuPoundSterling />{selectedCard?.price_per_unit}</span>
                       
                         <div className='flex justify-end my-5 ' onClick={() => handleCheckoutModal(selectedCard)}>
                             <button className='bg-primary  text-white py-4 px-8 font-semibold rounded'>Rent now</button>

@@ -9,6 +9,7 @@ import doneIcon from '../../public/assets/img/done.png'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { TfiClose } from 'react-icons/tfi'
+import { LuPoundSterling } from 'react-icons/lu'
 
 
 const initialState = {
@@ -157,6 +158,10 @@ const RentalModal = ({openCheckoutModal, checkoutItem, setOpenModal, setCheckout
                                 {quantity}
                                 <CiSquarePlus size={30} onClick={increaseQuantity}/>
                             </div>
+                        </div>
+                        <div className='pt-3 flex justify-between items-center'> 
+                            <span className=' text-lg flex items-center'><LuPoundSterling />{checkoutItem?.price_per_unit}</span>
+                            {/* <span className=' text-lg flex items-center'>Total Price:<LuPoundSterling />{(checkoutItem?.price_per_unit * quantity).toLocaleString()}</span> */}
                         </div>
                     
                     </div>

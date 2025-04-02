@@ -93,9 +93,7 @@ const partners = [
     {id: 3, icon: icon3},
     {id: 4, icon: icon4},
     {id: 5, icon: icon5},
-
 ]
-
 
 
 
