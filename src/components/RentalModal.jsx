@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from 'framer'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { CiCircleMinus, CiSquarePlus } from 'react-icons/ci'
 import DoneModalComponent from './DoneModal'
 import doneIcon from '../../public/assets/img/done.png'

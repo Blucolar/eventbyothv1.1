@@ -25,6 +25,8 @@ const BookTicketModal = ({show, setShow}) => {
     const [unitPrice, setUnitPrice] = useState(60)
     const [total, setTotal] = useState()
     
+    const [charge, setCharge] = useState(null);
+    
     // console.log("the items---",items)
     // let ticketSubTotalPrice 
     // let serviceCharge = 1;
@@ -61,6 +63,22 @@ const BookTicketModal = ({show, setShow}) => {
     
     // const subtotal = cart.reduce((total, item) => total + unitPrice * quantity, 0);
     // const totalAmount = subtotal + serviceCharge;
+
+    
+    const fetchCharge = async () => {
+        try {
+          const res = await axios.get('https://backend.eventsbyoth.com/api/v1/admin-service-charge');
+          setCharge(res?.data?.admin_service_charge);
+          console.log(charge)
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+    };
+
+    React.useEffect(() => {
+        fetchCharge();
+        fetchCharge();
+    },[])
 
 
     const handleSubmit = async(e) => {
@@ -239,7 +257,7 @@ const BookTicketModal = ({show, setShow}) => {
                                             <p className='flex flex-col'>
                                                <span className='font-semibold text-grey '> Service Charge</span>
                                             </p>
-                                            <span className='font-semibold text-base flex items-center'><LuPoundSterling />{serviceCharge}</span>
+                                            <span className='font-semibold text-base flex items-center'><LuPoundSterling />{charge}</span>
                                         </div>
                                         <div className='flex justify-between items-center font-semibold'>
                                             <span>Total</span>
