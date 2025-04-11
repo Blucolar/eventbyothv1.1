@@ -36,7 +36,13 @@ const page = () => {
     const [visibleCount, setVisibleCount] = useState(6)
     const isAllVisible = visibleCount >= items.length;
     const [formState, setFormState] = useState(initialState);
-    const [doneModal, setDoneModal] = useState(false)
+    const [doneModal, setDoneModal] = useState(false);
+    const [meta, setMeta] = useState({
+        current_page: 1,
+  per_page: 10,
+  total: 0,
+  last_page: 1
+    });
 
     const handleNext = () => {
         setStep((p) => p + 1)
@@ -74,35 +80,43 @@ const page = () => {
     };
 
 
-    useEffect(() => {
-        const fetchRental  = async() => {
-            setLoading(true)
-            try {
-                const response = await axios.get('https://backend.eventsbyoth.com/api/v1/rentals')
-                setItems(response.data.data)
-                console.log(response.data.data)
-            } catch (error) {
-                if(error){
+    const fetchRental  = async(page = 1) => {
+        setLoading(true)
+        try {
+            const response = await axios.get(`https://backend.eventsbyoth.com/api/v1/rentals?page=${page}`)
+            setItems(response.data.data)
+            console.log(response.data.data)
+            setMeta(response?.data.meta);
+            console.log("hello",response.data.meta)
+        } catch (error) {
+            if(error){
 
-                    toast.error("Error", error)
-                }
-            }finally{
-                setLoading(false)
+                toast.error("Error", error)
             }
+        }finally{
+            setLoading(false)
         }
-        fetchRental()
-    },[])
-
-    const handleLoadMore = () => {
-        setVisibleCount((prev) => prev + 6)
     }
 
-    const handleShowLess = () => {
-        setVisibleCount(6)
-    }
+    useEffect(() => {
+        fetchRental(meta?.current_page)
+    },[meta?.current_page])
 
-    // console.log(items)
 
+    // const handleLoadMore = () => {
+    //     setVisibleCount((prev) => prev + 6)
+    // }
+
+    // const handleShowLess = () => {
+    //     setVisibleCount(6)
+    // }
+
+    const changePage = (page) => {
+        if (page >= 1 && page <= meta?.last_page) {
+          setMeta((prev) => ({ ...prev, current_page: page }));
+        }
+    };
+    
   return (
     <>
         <section>
@@ -113,38 +127,47 @@ const page = () => {
          id='rentals'className='px-5 md:px-10 lg:px-20 py-10 md:py-30 bg-lightgray'
          >
             <h1 className="text-2xl lg:text-4xl  font-bold mb-4 py-5">Rentals  </h1>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-                {
-                    loading? <div className='animate-spin m-auto w-full flex justify-center items-center text-center'><Loader/></div> :
-                    !loading && !items.length ? <p className='text-center'>No data</p> :
-                    items.slice(0, visibleCount).map((item) => {
-                        return (
-                            <motion.div            
-                                key={item.id} className='h-[70vh] gap-4 rounded-lg overflow-hidden bg-white' onClick={() => handleModal(item)}  >
-                                <motion.div
-                                    whileHover={{ scale: 1.05 }} 
-                                    transition={{ type: "keyframes", stiffness: 300 }} 
-                                    className='bg-white border h-2/3'>
-                                    <Image src={item?.image_url} alt='image' width={500} height={500} className='h-full w-full object-cover rounded-lg'/>
-                                </motion.div>
-                                <div className='h-full px-3 '>
-                                    <h2 className='text-lg font-semibold py-2 flex items-center justify-between'>
-                                        <span>
-                                            {item?.name}
-                                        </span>
-                                        <span className='font-semibold text-lg flex items-center'><LuPoundSterling />{item?.price_per_unit}</span>
-                                    </h2>
-                                    <div className='flex justify-between items-center'>
-                                        <div className='rounded flex justify-center items-center text-center border border-primary w-full hover:border-opacity-70 transition-all cursor-pointer group' >
-                                            <button className='p-3 bg-white text-primary border-primary rounded group-hover:text-opacity-65'>Rent Now</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </motion.div>
+            {loading? <div className='animate-spin flex justify-center items-center text-center'><Loader/></div> :
+                <div >
+                    {
+        
+                        !loading && !items.length ? <p className='text-center'>No data</p> : (
+
+                            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8' >
+                                {
+
+                                items.map((item) => {
+                                    return (
+                                        <motion.div            
+                                            key={item.id} className='h-[70vh] gap-4 rounded-lg overflow-hidden bg-white' onClick={() => handleModal(item)}  >
+                                            <motion.div
+                                                whileHover={{ scale: 1.05 }} 
+                                                transition={{ type: "keyframes", stiffness: 300 }} 
+                                                className='bg-white border h-2/3'>
+                                                <Image src={item?.image_url} alt='image' width={500} height={500} className='h-full w-full object-cover rounded-lg'/>
+                                            </motion.div>
+                                            <div className='h-full px-3 '>
+                                                <h2 className='text-lg font-semibold py-2 flex items-center justify-between'>
+                                                    <span>
+                                                        {item?.name}
+                                                    </span>
+                                                    <span className='font-semibold text-lg flex items-center'><LuPoundSterling />{item?.price_per_unit}</span>
+                                                </h2>
+                                                <div className='flex justify-between items-center'>
+                                                    <div className='rounded flex justify-center items-center text-center border border-primary w-full hover:border-opacity-70 transition-all cursor-pointer group' >
+                                                        <button className='p-3 bg-white text-primary border-primary rounded group-hover:text-opacity-65'>Rent Now</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </motion.div>
+                                    )
+                                })
+                                }
+                            </div>
                         )
-                    })
-                }
-            </div>
+                    }
+                </div>
+            }
 
             {/* modal */}
             <ModalComponent isOpen={openModal} onClose={closeModal}>
@@ -178,13 +201,61 @@ const page = () => {
             }
             </ModalComponent>
 
-            <div className="text-center pt-10 font-semibold">
+            {/* <div className="text-center pt-10 font-semibold">
                 {
                     isAllVisible ?
                     <button  className="text-primary text-xl" onClick={handleShowLess}>Show Less</button> 
                     :
                     <button  className="text-primary text-xl" onClick={handleLoadMore}>Load More</button>
                 }
+            </div> */}
+
+            <div className='flex justify-center items-center py-5 '>
+                <div className="text-center flex gap-8">
+                <button
+                    onClick={() => changePage(meta?.current_page - 1)}
+                    disabled={meta?.current_page === 1}
+                    className={`bg-primary text-white py-2 px-4 rounded transition-all ${
+                        meta.current_page === 1
+                          ? 'opacity-50 cursor-not-allowed'
+                          : 'hover:opacity-70 '
+                      }`}
+                    >
+                    Prev
+                </button>
+
+                {[...Array(meta?.last_page)].map((_, index) => {
+                    const page = index + 1;
+                    return (
+                        <button
+                        key={page}
+                        onClick={() => changePage(page)}
+                        style={{
+                            fontWeight: meta?.current_page === page ? 'bold' : 'normal'
+                        }}
+                        >
+                        {page}
+                        </button>
+                    );
+                    })     
+                }
+
+                    <button
+                    onClick={() => {
+                        changePage(meta?.current_page + 1); 
+                        console.log("next btn",meta?.current_page); 
+                        console.log("next btn")
+                    }}
+                    disabled={meta?.current_page === meta?.last_page}
+                    className={`bg-primary text-white py-2 px-4 rounded transition-all ${
+                        meta.current_page === meta?.last_page
+                            ? 'opacity-50 cursor-not-allowed'
+                            : 'hover:opacity-70'
+                        }`}
+                    >
+                    Next
+                    </button>
+                </div>
             </div>
         </motion.section>
 

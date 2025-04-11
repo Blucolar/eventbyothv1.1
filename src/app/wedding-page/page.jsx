@@ -165,10 +165,10 @@ const page = () => {
             <div className='flex flex-col md:flex-row justify-center mx-auto gap-10'>
                 <div className='space-y-4 md:w-1/2'>
                     <h1 className="text-2xl lg:text-4xl  font-bold mb-4 py-5 font-serif">ABOUT TWF'25</h1>
-                    <p className=' sm:text-lg lg:text-2xl leading-8 py-5 ld:text-start text-neutral'>
+                    <div className=' sm:text-lg lg:text-2xl leading-8 py-5 ld:text-start text-neutral'>
                     {/* PartyWithOTH is a premier event management and rental service dedicated to turning your special moments into extraordinary experiences. With a passion for creativity and attention to detail, we bring visions to life—whether it’s an elegant wedding, a corporate gathering, or a lively celebration */}
                     <ReadMoreLess text={aboutUs} wordLimit={50}/>
-                    </p>
+                    </div>
                 </div>
                 <div className='md:w-1/2'>
                     <div className='w-auto h-[60vh] rounded-lg'>
