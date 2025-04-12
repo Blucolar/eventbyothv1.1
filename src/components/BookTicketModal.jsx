@@ -94,7 +94,7 @@ const BookTicketModal = ({show, setShow}) => {
                 booking_type: "event",
                 // delivery_address: formState.customer_address,
                 // event_date: 
-                amount: `${serviceCharge + unitPrice * quantity }`,
+                amount: `${unitPrice*quantity + Number(charge)}`,
                 tickets: [
                     {
                         event_id: 4,
@@ -261,7 +261,7 @@ const BookTicketModal = ({show, setShow}) => {
                                         </div>
                                         <div className='flex justify-between items-center font-semibold'>
                                             <span>Total</span>
-                                            <span className='font-semibold text-base flex items-center'><LuPoundSterling />{unitPrice * quantity + serviceCharge}</span>
+                                            <span className='font-semibold text-base flex items-center'><LuPoundSterling />{unitPrice*quantity + Number(charge)}</span>
                                         </div>
                                     </div>
                                     <button type="submit" disabled={loading} className='bg-primary text-white py-3 px-4 font-semibold rounded w-full p-5'>{ loading? "Processing..." : "Pay Now"}</button>
